@@ -25,10 +25,10 @@ export default function DateTime() {
 	return (
 		<>
 			<div className="w-full h-16 flex justify-center items-center bg-gray-100 rounded-md">
-				<span className="text-3xl">{formattedDate}</span>
+				<span className="text-xl font-bold">{formattedDate}</span>
 			</div>
 			<div className="w-full h-16 flex justify-center items-center bg-gray-100 rounded-md">
-				<span className="text-3xl">{formattedTime}</span>
+				<span className="text-xl font-bold">{formattedTime}</span>
 			</div>
 		</>
 	)
