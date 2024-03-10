@@ -52,6 +52,24 @@ export default function Calender() {
 		setShowPage(true)
 	}
 
+	function dayStatus(day: string | undefined) {
+		if (day === undefined) return ""
+		const today = new Date()
+
+		if (
+			today.toLocaleDateString("en-GB", {
+				day: "2-digit",
+				month: "short",
+			}) === day
+		)
+			return "bg-sky-300"
+
+		if (new Date(`${day} 2024`).valueOf() < today.valueOf())
+			return "bg-gray-300"
+
+		return "bg-white"
+	}
+
 	return (
 		<>
 			<Transition
@@ -96,14 +114,14 @@ export default function Calender() {
 
 			<div className="w-screen h-screen flex flex-col py-8">
 				<div className="max-w-5xl mx-auto w-full flex flex-col justify-center items-center space-y-4">
-					<h1 className="text-5xl text-center">Ramadan 2024</h1>
+					<h1 className="text-5xl text-center font-bold">Ramadan 1445/2024</h1>
 					<div className="flex flex-1 gap-4 w-full select-none">
 						<div className="w-full bg-gray-200 rounded-xl p-4 space-y-2">
 							<ul className="flex gap-2">
 								{days.map((day) => (
 									<li
 										key={day + guidGenerator()}
-										className="px-4 py-2 flex-1 rounded-md bg-gray-300 text-lg font-bold"
+										className="px-4 py-2 flex-1 rounded-md bg-gray-600 text-gray-200 text-lg font-bold"
 									>
 										{day}
 									</li>
@@ -117,15 +135,17 @@ export default function Calender() {
 											className="flex-1 flex flex-col overflow-hidden relative"
 										>
 											<button
-												className={`flex flex-col justify-start items-start w-full h-full px-4 py-2 rounded-md bg-gray-300 text-lg ${
+												className={`flex flex-col justify-start items-start w-full h-full px-4 py-2 rounded-md text-lg ${
 													getDay(week, weekDay) && "hover:opacity-80"
 												} ${
 													!getDay(week, weekDay) && "cursor-default"
-												} relative overflow-hidden`}
+												} relative overflow-hidden ${dayStatus(
+													getGregorianDay(week, weekDay)
+												)}`}
 												onClick={() => showDay(getDay(week, weekDay))}
 												disabled={!getDay(week, weekDay)}
 											>
-												<div>{getDay(week, weekDay)}</div>
+												<div className="font-bold">{getDay(week, weekDay)}</div>
 												<div className="text-xs text-gray-600">
 													{getGregorianDay(week, weekDay)}
 												</div>
@@ -134,10 +154,10 @@ export default function Calender() {
 													<div
 														className={`w-5 h-5 rotate-45 absolute right-0 bottom-0 translate-x-1/2 translate-y-1/2 ${
 															getDay(week, weekDay) > 20
-																? "bg-blue-500"
+																? "bg-blue-400"
 																: getDay(week, weekDay) > 10
-																? "bg-green-500"
-																: "bg-red-500"
+																? "bg-green-400"
+																: "bg-red-400"
 														}`}
 													></div>
 												) : null}
@@ -157,7 +177,7 @@ export default function Calender() {
 							{ashra.map((ashra) => (
 								<div
 									key={ashra.name}
-									className="flex flex-col justify-start items-start w-24 text-sm font-bold px-4 py-2 rounded-md bg-gray-300 relative overflow-hidden"
+									className="flex flex-col justify-start items-start w-24 text-sm font-bold px-4 py-2 rounded-md bg-gray-200 relative overflow-hidden"
 								>
 									<span>{ashra.name}</span>
 									<span
