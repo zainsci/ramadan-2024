@@ -30,7 +30,7 @@ export default function Calender() {
 	})
 
 	function getDay(week: number, weekDay: number) {
-		return week * 7 + weekDay <= 30 ? week * 7 + weekDay : null
+		return week * 7 + weekDay <= 30 ? week * 7 + weekDay : 0
 	}
 
 	function getGregorianDay(week: number, weekDay: number) {
@@ -45,7 +45,7 @@ export default function Calender() {
 		}
 	}
 
-	function showDay(day: number | null) {
+	function showDay(day: number) {
 		if (!day) return
 
 		setPage(day)
@@ -136,21 +136,24 @@ export default function Calender() {
 										>
 											<button
 												className={`flex flex-col justify-start items-start w-full h-full px-4 py-2 rounded-md text-lg ${
-													getDay(week, weekDay) && "hover:opacity-80"
+													!!getDay(week, weekDay) && "hover:bg-gray-100"
 												} ${
-													!getDay(week, weekDay) && "cursor-default"
+													!!!getDay(week, weekDay) && "cursor-default"
 												} relative overflow-hidden ${dayStatus(
 													getGregorianDay(week, weekDay)
 												)}`}
 												onClick={() => showDay(getDay(week, weekDay))}
 												disabled={!getDay(week, weekDay)}
 											>
-												<div className="font-bold">{getDay(week, weekDay)}</div>
+												<div className="font-bold">
+													{!!getDay(week, weekDay) && getDay(week, weekDay)}
+												</div>
 												<div className="text-xs text-gray-600">
-													{getGregorianDay(week, weekDay)}
+													{!!getDay(week, weekDay) &&
+														getGregorianDay(week, weekDay)}
 												</div>
 
-												{getDay(week, weekDay) !== null ? (
+												{getDay(week, weekDay) !== 0 ? (
 													<div
 														className={`w-5 h-5 rotate-45 absolute right-0 bottom-0 translate-x-1/2 translate-y-1/2 ${
 															getDay(week, weekDay) > 20
