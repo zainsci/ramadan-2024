@@ -70,12 +70,12 @@ export default function Calender() {
 				month: "short",
 			}) === day
 		)
-			return "bg-sky-300"
+			return "bg-sky-300 border-sky-300"
 
 		if (new Date(`${day} 2024`).valueOf() < today.valueOf())
 			return "bg-gray-300"
 
-		return "bg-white"
+		return "bg-white border-gray-300"
 	}
 
 	return (
@@ -95,7 +95,7 @@ export default function Calender() {
 				<div className="max-w-5xl mx-auto w-full flex flex-col justify-center items-center space-y-4">
 					<h1 className="text-5xl text-center font-bold">Ramadan 1445/2024</h1>
 					<div className="flex flex-1 gap-4 w-full select-none">
-						<div className="w-full bg-gray-200 rounded-xl p-4 space-y-2">
+						<div className="w-full bg-white border border-gray-200 rounded-xl p-4 space-y-2 shadow-xl">
 							<ul className="flex gap-2">
 								{days.map((day) => (
 									<li
@@ -127,7 +127,7 @@ export default function Calender() {
 													!!!getDay(week, weekDay) && "cursor-default"
 												} relative overflow-hidden ${dayStatus(
 													getGregorianDay(week, weekDay)
-												)}`}
+												)} border`}
 											>
 												<div className="font-bold">
 													{!!getDay(week, weekDay) && getDay(week, weekDay)}
@@ -154,9 +154,9 @@ export default function Calender() {
 								</ul>
 							))}
 						</div>
-						<div className="w-80 flex flex-col bg-gray-200 rounded-xl p-4 space-y-2">
+						<div className="w-80 flex flex-col border border-gray-200 rounded-xl p-4 space-y-2 shadow-xl">
 							<DateTime />
-							<div className="bg-gray-100 flex-1 rounded-md"></div>
+							<div className="bg-gray-100 border border-gray-200 flex-1 rounded-md"></div>
 						</div>
 					</div>
 					<div className="flex justify-center items-center select-none">
@@ -164,7 +164,7 @@ export default function Calender() {
 							{ashra.map((ashra) => (
 								<div
 									key={ashra.name}
-									className="flex flex-col justify-start items-start w-24 text-sm font-bold px-4 py-2 rounded-md bg-gray-200 relative overflow-hidden"
+									className="flex flex-col justify-start items-start w-24 text-sm font-bold px-4 py-2 rounded-md border border-gray-200 relative overflow-hidden shadow-xl"
 								>
 									<span>{ashra.name}</span>
 									<span
