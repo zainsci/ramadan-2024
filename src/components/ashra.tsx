@@ -65,9 +65,9 @@ export default function AshraInfo() {
 								{currAshra.title}
 							</h1>
 							<p>{currAshra.description}</p>
-							<div>
+							<div className="w-full">
 								<h2 className="font-bold">Dua:</h2>
-								<p className="arabic">{currAshra.dua}</p>
+								<p className="arabic text-right w-full">{currAshra.dua}</p>
 							</div>
 							<div>
 								<h2 className="font-bold">Translation:</h2>
