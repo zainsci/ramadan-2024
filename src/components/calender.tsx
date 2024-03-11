@@ -3,13 +3,9 @@ import { Transition } from "@headlessui/react"
 
 import DateTime from "./datetime"
 import { Link } from "react-router-dom"
+import AshraInfo from "./ashra"
 
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-const ashra = [
-	{ name: "Rehmah", color: "bg-red-400" },
-	{ name: "Magfirah", color: "bg-green-400" },
-	{ name: "Nijat", color: "bg-blue-400" },
-]
 
 function guidGenerator() {
 	var S4 = function () {
@@ -161,17 +157,7 @@ export default function Calender() {
 					</div>
 					<div className="flex justify-center items-center select-none">
 						<div className="w-full flex justify-center items-center gap-4">
-							{ashra.map((ashra) => (
-								<div
-									key={ashra.name}
-									className="flex flex-col justify-start items-start w-24 text-sm font-bold px-4 py-2 rounded-md border border-gray-200 relative overflow-hidden shadow-xl"
-								>
-									<span>{ashra.name}</span>
-									<span
-										className={`w-5 h-5 rotate-45 absolute right-0 bottom-0 translate-x-1/2 translate-y-1/2 ${ashra.color} z-20`}
-									></span>
-								</div>
-							))}
+							<AshraInfo />
 						</div>
 						<div className="w-80 flex flex-col"></div>
 					</div>
