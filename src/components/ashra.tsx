@@ -32,7 +32,7 @@ const AshraInfoDetails = {
 		title: "Ashra Nijat",
 		description:
 			"Third Ashra (Days 21-30): As Ramadan draws to a close, we seek refuge from the Hellfire (najat), intensifying our prayers and supplications for salvation and guidance.",
-		dua: "ﺍﻟﻠﻬﻢ ﺃﺟﺮﻧﺎ ﻣﻦ ﺍﻟﻨﺎﺭ",
+		dua: "اللهمّ أجرنا من النار",
 		translation: `"O Allah, save me from the fire of Hell"`,
 	},
 }
