@@ -1,8 +1,6 @@
 import { useState } from "react"
-import { Transition } from "@headlessui/react"
 
 import DateTime from "./datetime"
-import { Link } from "react-router-dom"
 import AshraInfo from "./ashra"
 
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
@@ -14,9 +12,13 @@ function guidGenerator() {
 	return S4() + S4() + S4()
 }
 
+const KSA = {
+	withKSA: "2024-03-10",
+	notWithKSA: "2024-03-11",
+} as const
+
 export default function Calender() {
-	const [page, setPage] = useState(-1)
-	const [showPage, setShowPage] = useState(false)
+	const [withKSA, setWithKSA] = useState<string>(KSA.withKSA)
 
 	function getDay(week: number, weekDay: number) {
 		return week * 7 + weekDay <= 30 ? week * 7 + weekDay : 0
@@ -26,34 +28,13 @@ export default function Calender() {
 		const thiDay = getDay(week, weekDay)
 		if (typeof thiDay === "number") {
 			if (thiDay === 0) return ""
-			const thisDate = new Date("2024-03-10")
+			const thisDate = new Date(withKSA)
 			const newDate = new Date(thisDate.setDate(thisDate.getDate() + thiDay))
 			return newDate.toLocaleDateString("en-GB", {
 				day: "2-digit",
 				month: "short",
 			})
 		} else return ""
-	}
-
-	function showDay(day: number) {
-		if (!day) return
-
-		// TODO: if the day > today: return
-		const today = new Date(new Date().toLocaleDateString("en-GB")).valueOf()
-		const startDay = new Date("2024-03-10")
-		console.log(startDay.valueOf(), startDay.setDate(startDay.getDate() + day))
-		const thisDay = new Date(
-			startDay.setDate(startDay.getDate() + day)
-		).valueOf()
-
-		console.log(
-			new Date(thisDay).toLocaleString("en-GB"),
-			new Date(today).toLocaleString("en-GB")
-		)
-		if (thisDay > today) return
-
-		setPage(day)
-		setShowPage(true)
 	}
 
 	function dayStatus(day: string | undefined) {
@@ -76,17 +57,6 @@ export default function Calender() {
 
 	return (
 		<>
-			<Transition
-				show={showPage}
-				enter="transition-opacity duration-200"
-				enterFrom="opacity-0"
-				enterTo="opacity-100"
-				leave="transition-opacity duration-200"
-				leaveFrom="opacity-100"
-				leaveTo="opacity-0"
-				onClick={() => setShowPage(false)}
-			></Transition>
-
 			<div className="w-screen h-screen flex flex-col py-8">
 				<div className="max-w-5xl mx-auto w-full flex flex-col justify-center items-center space-y-4">
 					<h1 className="text-5xl text-center font-bold">Ramadan 1445/2024</h1>
@@ -109,14 +79,7 @@ export default function Calender() {
 											key={getDay(week, weekDay) + guidGenerator()}
 											className="flex-1 flex flex-col overflow-hidden relative"
 										>
-											<Link
-												to={
-													getGregorianDay(week, weekDay) === ""
-														? ""
-														: `/day/${getGregorianDay(week, weekDay)
-																?.toString()
-																.replace(" ", "-")}`
-												}
+											<button
 												className={`flex flex-col justify-start items-start w-full h-full px-4 py-2 rounded-md text-lg ${
 													!!getDay(week, weekDay) && "hover:bg-gray-100"
 												} ${
@@ -144,7 +107,7 @@ export default function Calender() {
 														}`}
 													></div>
 												) : null}
-											</Link>
+											</button>
 										</li>
 									))}
 								</ul>
@@ -152,7 +115,20 @@ export default function Calender() {
 						</div>
 						<div className="w-80 flex flex-col border border-gray-200 rounded-xl p-4 space-y-2 shadow-xl">
 							<DateTime />
-							<div className="bg-gray-100 border border-gray-200 flex-1 rounded-md"></div>
+							<div className="bg-gray-100 border border-gray-200 flex-1 rounded-md space-y-2 p-2">
+								<button
+									className="w-full h-8 bg-white border border-gray-200 text-xs font-bold hover:bg-gray-100"
+									onClick={() => setWithKSA(KSA.withKSA)}
+								>
+									With KSA
+								</button>
+								<button
+									className="w-full h-8 bg-white border border-gray-200 text-xs font-bold hover:bg-gray-100"
+									onClick={() => setWithKSA(KSA.notWithKSA)}
+								>
+									Not With KSA
+								</button>
+							</div>
 						</div>
 					</div>
 					<div className="flex justify-center items-center select-none">
