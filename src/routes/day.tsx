@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom"
 
 export default function RamadanDay() {
 	const [note, setNote] = useState("")
-	const [selectedDay, setSelectedDay] = useState({
+	const [selectedDay] = useState({
 		title: "Ramadan 01st, 2024",
 		date: new Date(),
 		verse:
