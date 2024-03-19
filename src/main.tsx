@@ -6,16 +6,21 @@ import "./index.css"
 import Home from "./routes/home.tsx"
 import RamadanDay from "./routes/day.tsx"
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+	[
+		{
+			path: "/",
+			element: <Home />,
+		},
+		{
+			path: "day/:date",
+			element: <RamadanDay />,
+		},
+	],
 	{
-		path: "/",
-		element: <Home />,
-	},
-	{
-		path: "day/:date",
-		element: <RamadanDay />,
-	},
-])
+		basename: "/ramadan-2024",
+	}
+)
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
 	<React.StrictMode>
