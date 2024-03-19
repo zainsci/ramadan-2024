@@ -12,6 +12,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.18",
     "@material-design-icons/svg": "^0.14.13",
+    "clsx": "^2.1.0",
     "framer-motion": "^11.0.8",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.4",

@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
+import Button from "./button"
 
 const ashra = [
 	{ name: "Rehmah", color: "bg-red-400" },
@@ -79,9 +80,9 @@ export default function AshraInfo() {
 			</AnimatePresence>
 
 			{ashra.map((ashra) => (
-				<button
+				<Button
 					key={ashra.name}
-					className="flex flex-col justify-start items-start w-24 text-sm font-bold px-4 py-2 rounded-md border border-gray-200 relative overflow-hidden shadow-xl hover:bg-gray-100 active:translate-y-0.5"
+					className="relative overflow-hidden"
 					onClick={() =>
 						showAshraInfo(ASHRA[ashra.name.toUpperCase() as keyof typeof ASHRA])
 					}
@@ -90,7 +91,7 @@ export default function AshraInfo() {
 					<span
 						className={`w-5 h-5 rotate-45 absolute right-0 bottom-0 translate-x-1/2 translate-y-1/2 ${ashra.color} z-20`}
 					></span>
-				</button>
+				</Button>
 			))}
 		</>
 	)

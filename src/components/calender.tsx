@@ -2,6 +2,7 @@ import { useState } from "react"
 
 import DateTime from "./datetime"
 import AshraInfo from "./ashra"
+import Button from "./button"
 
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 
@@ -115,19 +116,19 @@ export default function Calender() {
 						</div>
 						<div className="w-80 flex flex-col border border-gray-200 rounded-xl p-4 space-y-2 shadow-xl">
 							<DateTime />
-							<div className="bg-gray-100 border border-gray-200 flex-1 rounded-md space-y-2 p-2">
-								<button
-									className="w-full h-8 bg-white border border-gray-200 text-xs font-bold hover:bg-gray-100"
+							<div className="bg-gray-200 border border-gray-200 flex-1 rounded-md space-y-2 p-2">
+								<Button
+									className="w-full"
 									onClick={() => setWithKSA(KSA.withKSA)}
 								>
 									With KSA
-								</button>
-								<button
-									className="w-full h-8 bg-white border border-gray-200 text-xs font-bold hover:bg-gray-100"
+								</Button>
+								<Button
+									className="w-full"
 									onClick={() => setWithKSA(KSA.notWithKSA)}
 								>
 									Not With KSA
-								</button>
+								</Button>
 							</div>
 						</div>
 					</div>
